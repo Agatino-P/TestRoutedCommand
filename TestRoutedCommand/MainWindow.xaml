@@ -7,7 +7,7 @@
         Title="MainWindow" Width="800" Height="450" mc:Ignorable="d">
     <Window.CommandBindings>
         <CommandBinding CanExecute="CanExecuteCustomCommand"
-                        Command="{x:Static local:CustomCommands.CustomRoutedCommand}"
+                        Command="{x:Static local:CommandingUCViewModel.CustomRoutedCommand}"
                         Executed="ExecuteCustomCommand" />
     </Window.CommandBindings>
     <StackPanel>

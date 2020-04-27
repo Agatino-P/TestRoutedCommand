@@ -7,11 +7,7 @@ using System.Windows.Input;
 
 namespace TestRoutedCommand
 {
-    public static class CustomCommands
-    {
-        public static RoutedCommand CustomRoutedCommand = new RoutedCommand();
-        //Define more commands here, just like the one above
-    }
+
     public class CommandingUCViewModel : ViewModelBase
     {
         private string _title="title"; 

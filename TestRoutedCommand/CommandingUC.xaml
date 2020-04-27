@@ -13,7 +13,7 @@
             <TextBlock Text="Title:" />
             <TextBox Text="{Binding Title}" />
         </DockPanel>
-        <Button Command="{x:Static local:CustomCommands.CustomRoutedCommand}"
+        <Button Command="{x:Static local:CommandingUCViewModel.CustomRoutedCommand}"
                 CommandParameter="{Binding}"
                 Content="RoutedCmd" />
 
