@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TestRoutedCommand
 {
@@ -19,10 +9,12 @@ namespace TestRoutedCommand
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowViewModel _vm = new MainWindowViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = _vm;
         }
 
         // CanExecuteRoutedEventHandler that only returns true if
@@ -30,10 +22,12 @@ namespace TestRoutedCommand
         private void CanExecuteCustomCommand(object sender, CanExecuteRoutedEventArgs e)
         {
             Control target = e.Source as Control;
-
-            if (target != null)
+            CommandingUCViewModel UCvm = e.Parameter as CommandingUCViewModel;
+            
+            if (target != null && UCvm != null)
             {
-                e.CanExecute = true;
+                e.CanExecute = _vm.UpdateLastPushedCmd.CanExecute(UCvm);
+                    ;
             }
             else
             {
@@ -44,10 +38,14 @@ namespace TestRoutedCommand
         private void ExecuteCustomCommand(object sender, ExecutedRoutedEventArgs e)
         {
             if (sender == null)
+            {
                 return;
+            }
+
             CommandingUCViewModel UCvm = e.Parameter as CommandingUCViewModel;
 
-            MessageBox.Show(UCvm?.Title,"Custom Command Executed!");
+            MessageBox.Show(UCvm?.Title, "Custom Command Executed!");
+                _vm.UpdateLastPushedCmd.Execute(UCvm);
         }
 
     }
