@@ -2,11 +2,24 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestRoutedCommand"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow" Width="800" Height="450" mc:Ignorable="d">
+    <Window.CommandBindings>
+        <CommandBinding CanExecute="CanExecuteCustomCommand"
+                        Command="{x:Static local:CustomCommands.CustomRoutedCommand}"
+                        Executed="ExecuteCustomCommand" />
+    </Window.CommandBindings>
+    <StackPanel>
+        <local:CommandingUC />
+        <ListBox MinHeight="100" ItemsSource="{Binding VMs}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <local:CommandingUC />
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+
 </Window>
